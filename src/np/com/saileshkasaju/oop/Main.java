@@ -15,11 +15,12 @@ import java.util.Scanner;
 public class Main {
   
   public static void main(String[] args) {
+    User user;
     UserDAO userDAO = new UserDAOImpl();
     String userFile = "User.csv";
     String productFile = "Product.csv";
     String employeeFile = "Employee.csv";
-  
+    
     File file = new File(userFile);
     System.out.println("Our current file path is\n"+file.getAbsolutePath());
     if (file.exists()) {
@@ -52,7 +53,7 @@ public class Main {
       password = in.nextLine();
       
       System.out.println("Verifying username and password in out data-center...");
-      User user = userDAO.login(username, password);
+      user = userDAO.login(username, password);
       if (user != null) {
         verified = true;
         System.out.println("Welcome " + user.getUsername());
@@ -66,49 +67,30 @@ public class Main {
     /* --------------------------------------
     Main Module
     ----------------------------------------- */
-    file = new File(productFile);
     ProductDAO productDAO = new ProductDAOImpl();
-    if (file.exists()) {
-      System.out.println("loading product data");
-      DataLoader dataLoader = new DataLoader();
-      try {
-        dataLoader.setProductDAO(productDAO);
-        dataLoader.loadProducts(productFile);
-      } catch (IOException e) {
-        System.out.println("Can't read file");
-      } finally {
-        System.out.println("Reading product data done");
-      }
-    } else {
-      System.out.println("Program can't run because database of products not found");
-      System.exit(0);
-    }
-    file = new File(employeeFile);
     EmployeeDAO employeeDAO = new EmployeeDAOImpl();
-    if (file.exists()) {
-      System.out.println("loading employee data");
-      DataLoader dataLoader = new DataLoader();
-      try {
-        dataLoader.setEmployeeDAO(employeeDAO);
-        dataLoader.loadEmployees(employeeFile);
-      } catch (IOException e) {
-        System.out.println("Can't read file");
-      } finally {
-        System.out.println("Reading employee data done");
-      }
-    } else {
-      System.out.println("Program can't run because database of employees not found");
-      System.exit(0);
+    System.out.println("loading main module data");
+    DataLoader dataLoader = new DataLoader();
+    try {
+      dataLoader.setProductDAO(productDAO);
+      dataLoader.loadProducts(productFile);
+      dataLoader.setEmployeeDAO(employeeDAO);
+      dataLoader.loadEmployees(employeeFile);
+    } catch (IOException e) {
+      System.out.println("Can't read file");
+    } finally {
+      System.out.println("Reading main module data done");
     }
+    
     
     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     
     String line = "";
-    System.out.print("$>");
+    System.out.print("$"+user.getUsername()+">");
     try {
       while(!(line = reader.readLine()).equalsIgnoreCase("exit")) {
         String[] tokens = line.split(" ");
-        System.out.print("$>");
+        System.out.print("$"+user.getUsername()+">");
       }
     } catch (IOException e) {
       System.out.println("I/O Exception occured");
