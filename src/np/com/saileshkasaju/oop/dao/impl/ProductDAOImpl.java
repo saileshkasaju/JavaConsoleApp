@@ -27,8 +27,18 @@ public class ProductDAOImpl implements ProductDAO {
     return null;
   }
   
+  private int generateId() {
+    int id = 0;
+    for(Product product: productList) {
+      if (product.getId() > id) {
+        id = product.getId();
+      }
+    }
+    return ( id + 1 );
+  }
   @Override
   public boolean insert(Product product) {
+    product.setId(generateId());
     return productList.add(product);
   }
 }

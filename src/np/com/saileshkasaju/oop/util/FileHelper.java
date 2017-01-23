@@ -1,9 +1,6 @@
 package np.com.saileshkasaju.oop.util;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +8,7 @@ import java.util.List;
  * Created by Edge on 1/19/2017.
  */
 public class FileHelper {
-  public static List<String> readLines(String fileName) throws IOException, FileNotFoundException {
+  public static List<String> readLines(String fileName) throws IOException {
     List<String> lines = new ArrayList<>();
     BufferedReader reader = new BufferedReader(new FileReader(fileName));
     String line = "";
@@ -21,4 +18,11 @@ public class FileHelper {
     reader.close();
     return lines;
   };
+  public static void writeLines(String fileName, List<String> lines) throws IOException {
+    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+    for (String line: lines) {
+      writer.write(line);
+    }
+    writer.close();
+  }
 }
