@@ -27,7 +27,14 @@ public class EmployeeDAOImpl implements EmployeeDAO {
     }
     return null;
   }
-  
+  @Override
+  public boolean removeById(int id) {
+    if (employeeList.remove(getById(id))) {
+      return true;
+    }else {
+      return false;
+    }
+  }
   private int generateId() {
     int id = 0;
     for(Employee employee: employeeList) {
@@ -39,7 +46,9 @@ public class EmployeeDAOImpl implements EmployeeDAO {
   }
   @Override
   public boolean insert(Employee employee) {
-//    System.out.println(employee.getId());
+    if (employee.getId() == 0) {
+      employee.setId(generateId());
+    }
     return employeeList.add(employee);
   }
 }

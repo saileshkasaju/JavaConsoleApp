@@ -26,6 +26,14 @@ public class ProductDAOImpl implements ProductDAO {
     }
     return null;
   }
+  @Override
+  public boolean removeById(int id) {
+    if (productList.remove(getById(id))) {
+      return true;
+    }else {
+      return false;
+    }
+  }
   
   private int generateId() {
     int id = 0;
@@ -38,7 +46,9 @@ public class ProductDAOImpl implements ProductDAO {
   }
   @Override
   public boolean insert(Product product) {
-    product.setId(generateId());
+    if (product.getId() == 0) {
+      product.setId(generateId());
+    }
     return productList.add(product);
   }
 }

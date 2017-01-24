@@ -8,6 +8,7 @@ import np.com.saileshkasaju.oop.entity.User;
 public interface UserDAO {
   List<User> getAll();
   User getById(int id);
+  boolean removeById(int id);
   boolean insert(User u);
   User login(String username, String password);
 }

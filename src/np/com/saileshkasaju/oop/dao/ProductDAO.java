@@ -10,6 +10,6 @@ public interface ProductDAO {
   List<Product> getAll();
   
   Product getById(int id);
-  
-  boolean insert(Product product);
+  boolean removeById(int id);
+    boolean insert(Product product);
 }

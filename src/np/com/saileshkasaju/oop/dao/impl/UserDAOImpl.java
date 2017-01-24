@@ -26,8 +26,29 @@ public class UserDAOImpl implements UserDAO {
   }
   
   @Override
-  public boolean insert(User u) {
-    return userList.add(u);
+  public boolean removeById(int id) {
+    if (userList.remove(getById(id))) {
+      return true;
+    }else {
+      return false;
+    }
+  }
+  
+  private int generateId() {
+    int id = 0;
+    for(User user: userList) {
+      if (user.getId() > id) {
+        id = user.getId();
+      }
+    }
+    return ( id + 1 );
+  }
+  @Override
+  public boolean insert(User user) {
+    if (user.getId() == 0) {
+      user.setId(generateId());
+    }
+    return userList.add(user);
   }
   
   @Override

@@ -10,6 +10,6 @@ public interface EmployeeDAO {
   List<Employee> getAll();
   
   Employee getById(int id);
-  
+  boolean removeById(int id);
   boolean insert(Employee employee);
 }
