@@ -12,7 +12,6 @@ import np.com.saileshkasaju.oop.entity.User;
 import np.com.saileshkasaju.oop.util.DataLoader;
 
 import java.io.*;
-import java.util.DoubleSummaryStatistics;
 import java.util.Scanner;
 
 public class Main {
