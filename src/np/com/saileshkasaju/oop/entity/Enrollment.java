@@ -8,17 +8,17 @@ import java.sql.Date;
 public class Enrollment {
   private int id;
   private Date enrollmentDate;
-  private int batchId;
+  private Batch batch;
   private Student student; // studentId;
   private Discount discount; //int discountId;
   
   public Enrollment() {
   }
   
-  public Enrollment(int id, Date enrollmentDate, int batchId, Student student, Discount discount) {
+  public Enrollment(int id, Date enrollmentDate, Batch batch, Student student, Discount discount) {
     this.id = id;
     this.enrollmentDate = enrollmentDate;
-    this.batchId = batchId;
+    this.batch = batch;
     this.student = student;
     this.discount = discount;
   }
@@ -39,12 +39,12 @@ public class Enrollment {
     this.enrollmentDate = enrollmentDate;
   }
   
-  public int getBatchId() {
-    return batchId;
+  public Batch getBatch() {
+    return batch;
   }
   
-  public void setBatchId(int batchId) {
-    this.batchId = batchId;
+  public void setBatch(Batch batch) {
+    this.batch = batch;
   }
   
   public Student getStudent() {
